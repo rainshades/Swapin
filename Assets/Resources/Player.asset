@@ -1,0 +1,294 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0b13a2481bf7643bde194f41072b74, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  Coins: 0
+  TotalNodesCompleted: 0
+  RunStreak: 0
+  LongestRunStreak: 0
+  SavedData:
+    CurrentNode: {fileID: 0}
+    route: []
+    RouteBoss:
+      Node: {fileID: 11400000, guid: 41246b2b1a1153f459a2cfc919f36569, type: 2}
+      Link_1: {fileID: 11400000, guid: ee05dfeb57dc43a45820125a5d78f952, type: 2}
+      Link_2: {fileID: 11400000, guid: 44f0128a387ef4147823a88490a921a7, type: 2}
+      Completed: 0
+  Inventory:
+  - rid: 5393219452992225640
+  - rid: 5393219452992225641
+  - rid: 5393219452992225642
+  - rid: 5393219452992225643
+  - rid: 5393219452992225644
+  - rid: 5393219452992225645
+  - rid: 5393219452992225646
+  - rid: 5393219452992225647
+  - rid: 5393219452992225648
+  - rid: 5393219452992225649
+  - rid: 5393219452992225650
+  - rid: 5393219452992225651
+  - rid: 5393219452992225652
+  - rid: 5393219452992225653
+  - rid: 5393219452992225654
+  - rid: 5393219452992225655
+  - rid: 5393219452992225656
+  - rid: 5393219452992225657
+  - rid: 5393219452992225658
+  - rid: 5393219452992225659
+  CachedNode1: 0
+  CachedNode2: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 5393219452992225640
+      type: {class: WardingBastion, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Warding Bastion
+        Description: 
+        CoinCost: 100
+        EquipmentSprite: {fileID: 21300000, guid: e1815abf8075736479b590c51a0db597, type: 3}
+        DamageBonus: 1.05
+        ScoreBonus: 0
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 0
+    - rid: 5393219452992225641
+      type: {class: PhoenixAshCHarm, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Pheonix Ash Charm
+        Description: 
+        CoinCost: 100
+        EquipmentSprite: {fileID: 21300000, guid: 4c04ad053ee998042a46a077caf44ee9, type: 3}
+        DamageBonus: 0
+        ScoreBonus: 1.05
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 0
+    - rid: 5393219452992225642
+      type: {class: FrostFire, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Frostfire
+        Description: 
+        CoinCost: 200
+        EquipmentSprite: {fileID: 21300000, guid: 639cf4a91f30e084db359868551b96c6, type: 3}
+        DamageBonus: 1.05
+        ScoreBonus: 0
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 100
+    - rid: 5393219452992225643
+      type: {class: ThunderClap, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Thunderclap
+        Description: 
+        CoinCost: 250
+        EquipmentSprite: {fileID: 21300000, guid: 345ffe8119bb8e944bfddbac421e56c9, type: 3}
+        DamageBonus: 0
+        ScoreBonus: 0
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 0
+    - rid: 5393219452992225644
+      type: {class: SirensSongAmulet, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Siren's Song Amulet
+        Description: 
+        CoinCost: 500
+        EquipmentSprite: {fileID: 21300000, guid: 3298b7ae0106f204a87b883902d874c4, type: 3}
+        DamageBonus: 1.25
+        ScoreBonus: 1.25
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 130
+    - rid: 5393219452992225645
+      type: {class: IllusionistsPrism, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Illusionist's Prism
+        Description: 
+        CoinCost: 500
+        EquipmentSprite: {fileID: 21300000, guid: 2322372f00a9a0e4186b2d347b6b587b, type: 3}
+        DamageBonus: 0
+        ScoreBonus: 1.5
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 150
+    - rid: 5393219452992225646
+      type: {class: KrakensTealGemstone, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Kraken's Teal Gemstone
+        Description: 
+        CoinCost: 500
+        EquipmentSprite: {fileID: 21300000, guid: e03697bd3eb28e74cbfc0f5e0aa60d65, type: 3}
+        DamageBonus: 1.5
+        ScoreBonus: 0
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 150
+    - rid: 5393219452992225647
+      type: {class: ShikrasTeeth, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Shikra's Teeth
+        Description: 
+        CoinCost: 600
+        EquipmentSprite: {fileID: 21300000, guid: 2d626855e1204f24d975dadb2fb495ee, type: 3}
+        DamageBonus: 2
+        ScoreBonus: 1.25
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 300
+    - rid: 5393219452992225648
+      type: {class: CrownOfTakiTee, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Crown of Taki Tee
+        Description: 
+        CoinCost: 600
+        EquipmentSprite: {fileID: 21300000, guid: b992b12b16a90ed4c93e30c8e6007d0d, type: 3}
+        DamageBonus: 1.5
+        ScoreBonus: 3.2
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 200
+    - rid: 5393219452992225649
+      type: {class: Wyrmguard, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Wyrmguard
+        Description: 
+        CoinCost: 600
+        EquipmentSprite: {fileID: 21300000, guid: ffbc0228cd1ca074ba1ec3ff0ec2e408, type: 3}
+        DamageBonus: 2
+        ScoreBonus: 2
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 500
+    - rid: 5393219452992225650
+      type: {class: Valor, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Valor
+        Description: 
+        CoinCost: 1000
+        EquipmentSprite: {fileID: 21300000, guid: c6ba4888f53dd9d4992cfff49a00ff30, type: 3}
+        DamageBonus: 5
+        ScoreBonus: 0
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 200
+    - rid: 5393219452992225651
+      type: {class: InfernoBlaze, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Inferno Blaze
+        Description: 
+        CoinCost: 1000
+        EquipmentSprite: {fileID: 21300000, guid: 068b7b040bf907e4284a04893c718997, type: 3}
+        DamageBonus: 1.5
+        ScoreBonus: 2
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 300
+    - rid: 5393219452992225652
+      type: {class: FrostBiteShroud, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Frostbite Shroud
+        Description: 
+        CoinCost: 1000
+        EquipmentSprite: {fileID: 21300000, guid: 22741ab6cbea5b64fb32f0527e22084e, type: 3}
+        DamageBonus: 1.5
+        ScoreBonus: 2
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 400
+    - rid: 5393219452992225653
+      type: {class: ThunderstormSurge, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: THunderstorm Surge
+        Description: 
+        CoinCost: 1000
+        EquipmentSprite: {fileID: 21300000, guid: c88d76233f063554a917e813cd444be3, type: 3}
+        DamageBonus: 2
+        ScoreBonus: 1.5
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 200
+    - rid: 5393219452992225654
+      type: {class: VerdantEmbrace, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Verdant Embrace
+        Description: 
+        CoinCost: 1000
+        EquipmentSprite: {fileID: 21300000, guid: 4780bd002ec8a9f4bb42ee79137b6f47, type: 3}
+        DamageBonus: 1.5
+        ScoreBonus: 1.5
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 750
+    - rid: 5393219452992225655
+      type: {class: DivineRadiance, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Divine Radiance
+        Description: 
+        CoinCost: 1500
+        EquipmentSprite: {fileID: 21300000, guid: dcc01af7fccc3124bb00258ec0ede920, type: 3}
+        DamageBonus: 0
+        ScoreBonus: 0
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 1000
+    - rid: 5393219452992225656
+      type: {class: ShadowRequiem, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Shadow Requiem
+        Description: 
+        CoinCost: 1500
+        EquipmentSprite: {fileID: 21300000, guid: ad0822790fbf00b4097615b35bf66ff2, type: 3}
+        DamageBonus: 10
+        ScoreBonus: 5
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 0
+    - rid: 5393219452992225657
+      type: {class: TempestFury, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Tempest Fury
+        Description: 
+        CoinCost: 1500
+        EquipmentSprite: {fileID: 21300000, guid: f3110139cbfd9c843b7cb5bd483dbb5f, type: 3}
+        DamageBonus: 0
+        ScoreBonus: 0
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 200
+    - rid: 5393219452992225658
+      type: {class: ZephyrGust, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Zephyr Gust
+        Description: 
+        CoinCost: 1500
+        EquipmentSprite: {fileID: 21300000, guid: 3e6741dcff0330b46916a0b2a29d9031, type: 3}
+        DamageBonus: 0
+        ScoreBonus: 0
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 200
+    - rid: 5393219452992225659
+      type: {class: AbyssalShardfall, ns: Inventory, asm: Assembly-CSharp}
+      data:
+        Name: Abyssal Shardfall
+        Description: 
+        CoinCost: 1500
+        EquipmentSprite: {fileID: 21300000, guid: c52f95a3b3f54ad4a8156d144596eba3, type: 3}
+        DamageBonus: 2
+        ScoreBonus: 2
+        Unlocked: 0
+        Equipped: 0
+        HealthBonus: 300
