@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,27 +6,37 @@ public class RewardedAds : MonoBehaviour
 {
     [SerializeField] Button _showAdButton;
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
-    [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
 
     void Awake()
     {
-        // Get the Ad Unit ID for the current platform:
-#if UNITY_IOS
-        _adUnitId = _iOSAdUnitId;
-#elif UNITY_ANDROID
-        _adUnitId = _androidAdUnitId;
-#endif
-
-        // Disable the button until the ad is ready to show:
+        IronSourceRewardedVideoEvents.onAdRewardedEvent += IronSourceRewardedVideoEvents_onAdRewardedEvent;
+        IronSourceRewardedVideoEvents.onAdShowFailedEvent += RewardedVideoOnAdShowFailedEvent;
+        IronSourceRewardedVideoEvents.onAdAvailableEvent += IronSourceRewardedVideoEvents_onAdAvailableEvent;
+        IronSource.Agent.shouldTrackNetworkState(true);
         _showAdButton.interactable = false;
         LoadAd(); 
+    }
+
+    private void IronSourceRewardedVideoEvents_onAdAvailableEvent(IronSourceAdInfo obj)
+    {
+
+    }
+
+    private void RewardedVideoOnAdShowFailedEvent(IronSourceError arg1, IronSourceAdInfo arg2)
+    {
+        Debug.LogError(arg1.getDescription()); 
+    }
+
+    private void Update()
+    {
+        bool available = IronSource.Agent.isRewardedVideoAvailable();
+        _showAdButton.interactable = available; 
     }
 
     // Call this public method when you want to get an ad ready to show.
     private void LoadAd()
     {
-        // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
         Debug.Log("Loading Ad: " + _adUnitId);
         _showAdButton.onClick.AddListener(ShowAd);
         _showAdButton.interactable = IronSource.Agent.isRewardedVideoAvailable();
@@ -34,12 +45,8 @@ public class RewardedAds : MonoBehaviour
     // Implement a method to execute when the user clicks the button:
     public void ShowAd()
     {
-        // Disable the button:
-        _showAdButton.interactable = false;
         // Then show the ad:
         IronSource.Agent.showRewardedVideo(_adUnitId);
-        IronSourceRewardedVideoEvents.onAdRewardedEvent += IronSourceRewardedVideoEvents_onAdRewardedEvent;
-        //Cooldown
     }
 
     private void IronSourceRewardedVideoEvents_onAdRewardedEvent(IronSourcePlacement arg1, IronSourceAdInfo arg2)

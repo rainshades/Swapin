@@ -14,10 +14,10 @@ public class MainMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.singleton.SetSong(0);
-
         try
         {
+            GameManager.singleton.SetSong(0);
+
             switch (GameManager.singleton.GameLoader.loadState)
             {
                 case GameManager.LevelManager.LoadState.Break:
@@ -36,9 +36,16 @@ public class MainMenu : MonoBehaviour
                     break;
             }
         }
-        catch {
-            GameManager.singleton.GameLoader.loadState = GameManager.LevelManager.LoadState.Break;
-            Debug.LogWarning("Main Menu OnEnable Initialized with errors"); }
+        catch
+        {
+
+            FindObjectOfType<GameManager>().GameLoader.loadState = GameManager.LevelManager.LoadState.Break;
+            FindObjectOfType<GameManager>().SetSong(0); 
+
+            Debug.LogWarning("Main Menu OnEnable Initialized with errors");
+        }
+
+        FindObjectOfType<BannerAd>().ShowBannerAd(); 
     }
 
     public void BeginNewRun()
@@ -46,6 +53,7 @@ public class MainMenu : MonoBehaviour
         Map?.SetActive(true);
         Map?.GetComponent<MapMenu>().AssignNodes(); 
         gameObject.SetActive(false);
+
     }
 
     public void ContinueOldRun()
@@ -66,6 +74,13 @@ public class MainMenu : MonoBehaviour
     {
         PlayerStats.gameObject.SetActive(true);
         gameObject.SetActive(false); 
+    }
+
+    public void BackToMainMenu(Transform OpenMenu)
+    {
+        GameManager.singleton.GameLoader.loadState = GameManager.LevelManager.LoadState.Break;
+        gameObject.SetActive(true);
+        OpenMenu.gameObject.SetActive(false); 
     }
 
 }

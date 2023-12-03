@@ -124,7 +124,11 @@ public class Player : ScriptableObject
         set
         {
             currentHealth = value;
-            CodeMonkey.Match3UI.UpdatePlayerHealthSlider(MaxHealth, currentHealth);
+            try
+            {
+                CodeMonkey.Match3UI.UpdatePlayerHealthSlider(MaxHealth, currentHealth);
+            }
+            catch { }
         }
     }
 

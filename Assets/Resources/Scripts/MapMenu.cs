@@ -25,7 +25,7 @@ public class MapData
 
     public void Reset()
     {
-        route = null; 
+        route = null;
     }
 }
 

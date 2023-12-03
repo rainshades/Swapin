@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
                 LoadGameScene();
                 return;
             }//GameplayScene
-
+            
 
             LevelTypeToLoad = null;
         }

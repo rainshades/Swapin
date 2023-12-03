@@ -1,96 +1,71 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+
 
 public class BannerAd : MonoBehaviour
 {
     [SerializeField] Button _hideBannerButton;
 
-    [SerializeField] BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
-   
-    [SerializeField] string _androidAdUnitId = "Banner_Android";
-    [SerializeField] string _iOSAdUnitId = "Banner_iOS";
-    string _adUnitId = null; // This will remain null for unsupported platforms.
-
     void Start()
     {
-        _hideBannerButton.gameObject.SetActive(false);  
+        _hideBannerButton.gameObject.SetActive(false);
 
-        // Get the Ad Unit ID for the current platform:
-#if UNITY_IOS
-        _adUnitId = _iOSAdUnitId;
-#elif UNITY_ANDROID
-        _adUnitId = _androidAdUnitId;
-#endif
+        //Add AdInfo Banner Events
+        IronSourceBannerEvents.onAdLoadedEvent += BannerOnAdLoadedEvent;
+        IronSourceBannerEvents.onAdLoadFailedEvent += BannerOnAdLoadFailedEvent;
+        IronSourceBannerEvents.onAdClickedEvent += BannerOnAdClickedEvent;
+        IronSourceBannerEvents.onAdScreenPresentedEvent += BannerOnAdScreenPresentedEvent;
+        IronSourceBannerEvents.onAdScreenDismissedEvent += BannerOnAdScreenDismissedEvent;
+        IronSourceBannerEvents.onAdLeftApplicationEvent += BannerOnAdLeftApplicationEvent;
 
-        // Set the banner position:
-        Advertisement.Banner.SetPosition(_bannerPosition);
+        IronSource.Agent.loadBanner(IronSourceBannerSize.SMART, IronSourceBannerPosition.BOTTOM, "Banner Android"); 
+    }
+
+    private void BannerOnAdScreenPresentedEvent(IronSourceAdInfo obj)
+    {
+    }
+
+    private void BannerOnAdLeftApplicationEvent(IronSourceAdInfo obj)
+    {
+    }
+
+    private void BannerOnAdScreenDismissedEvent(IronSourceAdInfo obj)
+    {
+    }
+
+    private void BannerOnAdClickedEvent(IronSourceAdInfo obj)
+    {
+    }
+
+    private void BannerOnAdLoadFailedEvent(IronSourceError obj)
+    {
+        Debug.LogError(obj.getDescription()); 
+    }
+
+    private void BannerOnAdLoadedEvent(IronSourceAdInfo obj)
+    {
+        Debug.LogWarning("Banner loaded");
+
+        _hideBannerButton.onClick.AddListener(HideBannerAd);
+        _hideBannerButton.gameObject.SetActive(true);
+        _hideBannerButton.interactable = true;
 
         ShowBannerAd();
-        LoadBanner();
-    }
-
-    // Implement a method to call when the Load Banner button is clicked:
-    public void LoadBanner()
-    {
-        // Set up options to notify the SDK of load events:
-        BannerLoadOptions options = new BannerLoadOptions
-        {
-            loadCallback = OnBannerLoaded,
-            errorCallback = OnBannerError
-        };
-
-        // Load the Ad Unit with banner content:
-        Advertisement.Banner.Load(_adUnitId, options);
-    }
-
-    // Implement code to execute when the loadCallback event triggers:
-    void OnBannerLoaded()
-    {
-        Debug.Log("Banner loaded");
-
-        // Configure the Hide Banner button to call the HideBannerAd() method when clicked:
-        _hideBannerButton.onClick.AddListener(HideBannerAd);
-        _hideBannerButton.gameObject.SetActive(true); 
-        _hideBannerButton.interactable = true;
-    }
-
-    // Implement code to execute when the load errorCallback event triggers:
-    void OnBannerError(string message)
-    {
-        Debug.Log($"Banner Error: {message}");
-        // Optionally execute additional code, such as attempting to load another ad.
     }
 
     // Implement a method to call when the Show Banner button is clicked:
     public void ShowBannerAd()
     {
-        // Set up options to notify the SDK of show events:
-        BannerOptions options = new BannerOptions
-        {
-            clickCallback = OnBannerClicked,
-            hideCallback = OnBannerHidden,
-            showCallback = OnBannerShown
-        };
-
-        // Show the loaded Banner Ad Unit:
-        Advertisement.Banner.Show(_adUnitId, options);
+        IronSource.Agent.displayBanner();
     }
 
     // Implement a method to call when the Hide Banner button is clicked:
-    public void HideBannerAd()
-    {
-        // Hide the banner:
-        Advertisement.Banner.Hide();
-        _hideBannerButton.gameObject.SetActive(false);
-    }
-
-    void OnBannerClicked() { }
-    void OnBannerShown() { }
-    void OnBannerHidden() { }
+    public void HideBannerAd() => IronSource.Agent.hideBanner(); 
 
     void OnDestroy()
     {
         _hideBannerButton.onClick.RemoveAllListeners();
+        IronSource.Agent.destroyBanner(); 
     }
 }

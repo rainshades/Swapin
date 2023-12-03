@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI.Extensions;
 using CodeMonkey.Match3Game;
 using System.Linq; 
 
